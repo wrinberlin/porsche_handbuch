@@ -13,12 +13,14 @@ USAGE: Run from command line:
 # Imports
 # =============================================================================
 
+import streamlit as st
+
+OPENAI_API_KEY = st.secrets["openai"]["api_key"]
+
 import os
 from pathlib import Path
 
-OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
 
-import streamlit as st
 from PyPDF2 import PdfReader
 
 from langchain.chat_models import ChatOpenAI
