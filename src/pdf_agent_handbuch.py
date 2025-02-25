@@ -133,10 +133,6 @@ def main():
         # Automatically add a new question input field below the last one
         st.session_state.question_count += 1  # Increment the question count for the next question slot
         
-        # Exit button
-        if st.button('Exit'):
-            st.write("Exiting the application...")
-            os._exit(0)
 
 if __name__ == "__main__":
     main()
