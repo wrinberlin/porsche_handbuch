@@ -49,7 +49,7 @@ CHUNK_OVERLAP = 300
 MAX_TOKENS = 4096  # Adjust this based on the model's token limit
 RESPONSE_BUFFER = 500  # Reserve tokens for the response
 
-IMAGE_PATH = project_root / "Porsche_Demos" / "illustrations" / "taycan.jpg"   # Taycan Image
+IMAGE_PATH = project_root / "porsche_handbuch" / "illustrations" / "taycan.jpg"   # Taycan Image
 
 def calculate_token_length(text, model_name="gpt-4"):
     """Calculate the token length of a text."""
