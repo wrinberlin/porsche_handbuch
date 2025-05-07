@@ -5,7 +5,7 @@ Created on Tue Aug 20 09:41:40 2024
 @author: Wolfgang Reuter
 
 USAGE: Run from command line: 
-    streamlit run c:\porsche_demos\src\pdf_agent_handbuch.py
+    streamlit run c:\porsche_handbuch\src\pdf_agent_handbuch.py
 
 """
 
@@ -88,7 +88,30 @@ def main():
         
         # Create embeddings
         embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY) 
-        knowledge_base = FAISS.from_texts(chunks, embeddings)
+        # knowledge_base = FAISS.from_texts(chunks, embeddings)
+        
+    
+        def batch_chunks(texts, batch_size=100):
+            """Yield successive batch_size-sized chunks from texts."""
+            for i in range(0, len(texts), batch_size):
+                yield texts[i:i + batch_size]
+        
+        # Create an empty FAISS index
+        index = None
+        
+        # Process chunks in batches
+        for batch in batch_chunks(chunks, batch_size=100):
+            if len(batch) == 0:
+                continue
+            partial_index = FAISS.from_texts(batch, embeddings)
+            if index is None:
+                index = partial_index
+            else:
+                index.merge_from(partial_index)
+        
+        knowledge_base = index
+
+
         
         if "question_count" not in st.session_state:
             st.session_state.question_count = 1  # Initialize the question counter
