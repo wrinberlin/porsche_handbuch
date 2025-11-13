@@ -23,7 +23,7 @@ from pathlib import Path
 
 from PyPDF2 import PdfReader
 
-from langchain.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
 from langchain.prompts.chat import (
     ChatPromptTemplate,
     SystemMessagePromptTemplate,
